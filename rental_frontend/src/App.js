@@ -4,6 +4,7 @@ import './App.css';
 import {Link, Routes, Route, Router, BrowserRouter} from 'react-router-dom'
 import HomePage from './HomePage';
 import Header from './Header';
+import InsertProperty from './InsertProperty';
 
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
 
      <Routes>
      <Route path="/" element={<HomePage />}/>
-
+     <Route path="/insert" element={<InsertProperty />}/>
      </Routes>
      </BrowserRouter>
     </div>
