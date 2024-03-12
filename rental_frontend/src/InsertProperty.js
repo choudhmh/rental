@@ -12,8 +12,7 @@ function InsertProperty() {
         postcode: '',
         email: '',
         image1: null,  
-        image2: null, 
-        image3: null, 
+      
         price: '',
         contact: ''
     });
@@ -46,8 +45,7 @@ function InsertProperty() {
             formData.append('postcode', values.postcode);
             formData.append('email', values.email);
             if (values.image1) formData.append('image', values.image1);
-if (values.image2) formData.append('image', values.image2);
-if (values.image3) formData.append('image', values.image3);
+
 
             formData.append('price', values.price);
             formData.append('contact', values.contact);
@@ -56,7 +54,7 @@ if (values.image3) formData.append('image', values.image3);
 
                 .then(res => {
                     console.log(res);
-                    navigate('/');
+                    navigate('/Home');
                 })
                 .catch(err => {
                     console.log(err);
