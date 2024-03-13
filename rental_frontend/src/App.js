@@ -7,6 +7,7 @@ import Header from './Header';
 import InsertProperty from './InsertProperty';
 import Display from './Display';
 import Update from './Update';
+import Delete from './Delete';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
      <Route path="/insert" element={<InsertProperty />}/>
      <Route path="/display" element={<Display />}/>
      <Route path="/update/:id" element={<Update />} />
+     <Route path="/delete/:id" element={<Delete />} />
      </Routes>
      </BrowserRouter>
     </div>

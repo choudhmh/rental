@@ -26,6 +26,9 @@
     .edit {
         background: rgb(0, 225, 255);
             }
+    .cancel {
+        background: rgb(156, 239, 156);
+            }
 
     .edit:before, .save:before, .new:before, .cancel:before, .delete:before {
         font-family: FontAwesome;
@@ -33,6 +36,6 @@
         font-size:1rem;
         padding-right:12px;
         background:none;
-        color:#FFF;
+        color:#1004f1;
       }
   

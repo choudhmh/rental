@@ -46,7 +46,6 @@ function InsertProperty() {
             formData.append('email', values.email);
             if (values.image1) formData.append('image', values.image1);
 
-
             formData.append('price', values.price);
             formData.append('contact', values.contact);
 
@@ -54,7 +53,7 @@ function InsertProperty() {
 
                 .then(res => {
                     console.log(res);
-                    navigate('/Home');
+                    navigate('/');
                 })
                 .catch(err => {
                     console.log(err);

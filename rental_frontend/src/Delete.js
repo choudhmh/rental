@@ -1,11 +1,25 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { useNavigate, useParams, Link } from "react-router-dom";
+import React from "react";
+import Display from "./Display";
 import './style.css';
 
-function Update() {
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Link,
+  Outlet,
+  Navigate,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
+import Validation from "./SignupValidation";
+import { useState, useEffect } from "react";
+import axios from "axios";
+
+function Delete() {
 
     const navigate = useNavigate();
+
     const { id } = useParams();
   
     const [title, setTitle] = useState("");
@@ -16,43 +30,33 @@ function Update() {
     const [email, setEmail] = useState("");
     const [price, setPrice] = useState("");
     const [contact, setContact] = useState("");
+   
+  
+    const Navigate = useNavigate();
     const [errors, setErrors] = useState({});
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-        const formData = new FormData();
-        formData.append("title", title);
-        formData.append("description", description);
-        formData.append("address", address);
-        formData.append("postcode", postcode);
-        if (image) {
-          formData.append("image", image);
-        }
-        formData.append("email", email);
-        formData.append("price", price);
-        formData.append("contact", contact);
+        e.preventDefault(); 
     
-        axios
-          .put(`http://localhost:8081/update/${id}`, formData, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          })
-          .then((response) => {
+        axios.delete(`http://localhost:8081/delete/${id}`)
+          .then(response => {
             console.log(response.data);
-            navigate("/Display");
+            // Handle success (e.g., show a success message, navigate to another page, etc.)
+            Navigate('/Display'); 
           })
-          .catch((error) => {
-            console.error("Error updating record:", error);
+          .catch(error => {
+            console.error("Error deleting record:", error);
+            // Handle error (e.g., show error message)
           });
       };
 
       useEffect(() => {
-        axios
-          .get(`http://localhost:8081/getrecord/${id}`)
+        axios.get("http://localhost:8081/getrecord/" + id)
           .then((res) => {
+            console.log(res.data.data)
+            // Assuming res.data.data is the array based on the structure you've shown
             if (res.data.success && res.data.data.length > 0) {
-              const propInfo = res.data.data[0];
+              const propInfo = res.data.data[0]; // First object in the array
               setTitle(propInfo.title || ""); // Set default value if propInfo.title is undefined
               setDescription(propInfo.description || "");
               setAddress(propInfo.address || "");
@@ -64,21 +68,15 @@ function Update() {
               setPrice(propInfo.price || "");
               setContact(propInfo.contact || "");
             } else {
-              console.log("No user data found or success is false");
+              // Handle the case where data is not in the expected format or is empty
+              console.log('No user data found or success is false');
             }
           })
           .catch((err) => {
             console.error("Fetching user data failed:", err);
-            // Optionally, you can set default values or show an error message here
           });
-          
-      }, [id]);
-    
+      }, [id]); // Ensure useEffect re-runs if id changes
 
-      const handleFileChange = (e) => {
-        // Set the image state to the selected file object
-        setImage(e.target.files[0] || null);
-      };
 
   return (
     <div className="d-flex justify-content-center align-items-center bg-primary vh-100">
@@ -152,7 +150,7 @@ function Update() {
           <input
             type="file"
             className="form-control rounded-0"
-            onChange={handleFileChange}
+            onChange={(e) => setPostcode(e.target.value)}
           />
           {errors.image && (
             <span className="text-danger">{errors.image}</span>
@@ -210,7 +208,7 @@ function Update() {
         </div>
 
         <button type="submit" className="btn btn-success w-100">
-          <strong>Update Account</strong>
+          <strong>Delete Record</strong>
         </button>
         <button className="button primary cancel">
       <Link to={`/display`}>Cancel Update</Link></button>
@@ -220,4 +218,4 @@ function Update() {
   )
 }
 
-export default Update
+export default Delete

@@ -60,6 +60,7 @@ const Display = () => {
               <th scope="col">Title</th>
               <th scope="col">Description</th>
               <th scope="col">Address</th>
+              <th scope="col">Postcode</th>
               <th scope="col">Email</th>
               <th scope="col">Images</th>
               <th scope="col">Price</th>

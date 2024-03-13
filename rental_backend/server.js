@@ -42,6 +42,13 @@ db.connect((err) => {
   console.log("Connected to database");
 });
 
+// Start the server
+const PORT = process.env.PORT || 8081;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+
+
 // Route to insert property details
 app.post("/insert", upload.array("image"), (req, res) => {
   const { title, description, address, postcode, email, contact, price } =
@@ -156,11 +163,25 @@ app.put("/update/:id", upload.single("image"), (req, res) => {
     });
   });
   
+  //Delete records
+  app.delete('/delete/:id', (req, res) => {
+    const sql = "DELETE FROM property WHERE propertyID = ?";
+    const id = req.params.id;
 
-  
+    db.query(sql, [id], (err, data) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'An error occurred while executing the SQL query.' });
+        }
 
-// Start the server
-const PORT = process.env.PORT || 8081;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+        if (!data.affectedRows) {
+            // If no rows were affected, it means there was no record with the provided ID
+            return res.status(404).json({ error: 'No record found with the provided ID.' });
+        }
+
+        console.log(data);
+        return res.json({ success: true, data: data });
+    });
 });
+
+
