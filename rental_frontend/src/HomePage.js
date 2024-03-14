@@ -72,8 +72,8 @@ function HomePage() {
         <h1>{property.title}</h1>
       </div>
       <div className="card-bottom">
-        <h3>{property.price}</h3>
-        <span className="category">{property.description}</span>
+        <h2>{property.price}</h2>
+       
       </div>
     </div>
   ));

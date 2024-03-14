@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import Validation from './SignupValidation';
+import Display from './Display';
 
 
 function InsertProperty() {
@@ -53,7 +54,7 @@ function InsertProperty() {
 
                 .then(res => {
                     console.log(res);
-                    navigate('/');
+                    navigate('/Display');
                 })
                 .catch(err => {
                     console.log(err);
